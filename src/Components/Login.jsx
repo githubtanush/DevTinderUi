@@ -9,6 +9,7 @@ import { BASE_URL } from '../utils/constants';
 const Login = () => {
     const [emailId,setEmailId] = useState("tanush935@gmail.com");
     const [password,setPassword] = useState("Tanush@1234");
+    const [error,setError] = useState("");
     const dispatch = useDispatch();
     
     // Never call a hook inside a function
@@ -23,7 +24,8 @@ const Login = () => {
       dispatch(addUser(res.data));
       return navigate("/");
       }catch(err){
-            console.error(err);
+        setError(err.response?.data || "Something went wrong");
+            // console.error(err.response?.message || "Something went wrong");
         }
     };
 
@@ -87,6 +89,7 @@ const Login = () => {
   <br />At least one number <br />At least one lowercase letter <br />At least one uppercase letter
 </p>
     </div>
+    <p className='text-red-500'>{error}</p>
     <div className="card-actions justify-end">
       <button className="btn btn-primary" onClick={handleLogin}>Login</button>
     </div>
