@@ -13,9 +13,10 @@ function App() {
       {/* <Route path="/" element = {<div> Base page </div>} />
       <Route path="/login" element= {<div> Login page </div> } /> */}
       {/* so until of doing these things i want to render the body component there */}
-      <Route path="/" element = {<Body />} />
-      <Route path="/login" element = { <Login />} />
-      <Route path="/profile" element = { <Profile /> } />
+      <Route path="/" element = {<Body />}>
+        <Route path="/login" element = { <Login />} />
+        <Route path="/profile" element = { <Profile /> } />
+      </Route>
     </Routes>
     </BrowserRouter>
     {/* <NavBar />
