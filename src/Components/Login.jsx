@@ -1,19 +1,28 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/userSlice';
+import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../utils/constants';
 
 const Login = () => {
     const [emailId,setEmailId] = useState("tanush935@gmail.com");
     const [password,setPassword] = useState("Tanush@1234");
+    const dispatch = useDispatch();
     
+    // Never call a hook inside a function
+    const navigate = useNavigate();
     const handleLogin = async() => {
         try{
-        const res = await axios.post("http://localhost:3000/login",{
+        const res = await axios.post(BASE_URL + "login",{
             emailId,
             password,
         },
-      {withCredentials : true}
-    );}catch(err){
+      {withCredentials : true});
+      dispatch(addUser(res.data));
+      return navigate("/");
+      }catch(err){
             console.error(err);
         }
     };
